@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GN_amoblamientos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .whatsapp-bubble {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: #25d366;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <header class="bg-white shadow-lg">
+    <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-48 object-cover" />
+  </header>
+
+  <main class="max-w-3xl mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Finalizar compra</h2>
+    <form id="checkout-form" class="space-y-4">
+      <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-2 border rounded" required>
+      <input type="text" id="direccion" placeholder="Dirección" class="w-full p-2 border rounded" required>
+      <input type="email" id="email" placeholder="Correo electrónico" class="w-full p-2 border rounded" required>
+      <input type="tel" id="telefono" placeholder="Teléfono" class="w-full p-2 border rounded" required>
+      <select id="metodo" class="w-full p-2 border rounded" required>
+        <option value="">Seleccioná un método de pago</option>
+        <option value="transferencia">Transferencia Bancaria</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+      </select>
+      <button type="submit" class="bg-black text-white px-4 py-2 rounded">Confirmar compra</button>
+    </form>
+    <div id="mensaje" class="mt-4 text-green-600 font-semibold hidden">¡Compra finalizada correctamente!</div>
+  </main>
+
+  <a href="https://wa.me/5492615524525" class="whatsapp-bubble" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" width="20" height="20" />
+    WhatsApp
+  </a>
+
+  <script>
+    document.getElementById("checkout-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const datos = {
+        nombre: document.getElementById("nombre").value,
+        direccion: document.getElementById("direccion").value,
+        email: document.getElementById("email").value,
+        telefono: document.getElementById("telefono").value,
+        metodo: document.getElementById("metodo").value
+      };
+      localStorage.setItem("compra", JSON.stringify(datos));
+      document.getElementById("mensaje").classList.remove("hidden");
+    });
+  </script>
+
+</body>
+</html>
