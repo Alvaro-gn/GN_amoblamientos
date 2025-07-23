@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,68 +38,67 @@
     }
   </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="bg-gray-100 text-gray-800">
 
   <a href="#" class="carrito-icono" onclick="toggleCarrito()">🛒 <span id="cart-count">0</span></a>
+
   <a href="https://wa.me/5492615524525" class="whatsapp-bubble" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
     WhatsApp
   </a>
 
-  <header class="relative w-full h-[400px] md:h-[500px] bg-center bg-cover" style="background-image: url('https://via.placeholder.com/1600x400');">
-    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-      <h1 class="text-4xl md:text-6xl text-white font-bold">GN_amoblamientos</h1>
-    </div>
+  <header class="relative h-[400px] md:h-[500px] w-full overflow-hidden mb-10">
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+    <img src="https://via.placeholder.com/1200x500?text=GN_amoblamientos" alt="GN_amoblamientos" class="w-full h-full object-cover object-center">
   </header>
 
-  <section class="max-w-6xl mx-auto px-4 mt-8 mb-6">
-    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-      <input id="search" type="text" placeholder="Buscar productos..." class="p-2 border rounded w-full md:w-1/3" />
-      <select id="filter-category" class="p-2 border rounded w-full md:w-1/3">
-        <option value="">Todas las categorías</option>
-        <option value="Sillas">Sillas</option>
-        <option value="Mesas">Mesas</option>
-        <option value="Escritorios">Escritorios</option>
-      </select>
-      <select id="filter-price" class="p-2 border rounded w-full md:w-1/3">
-        <option value="">Todos los precios</option>
-        <option value="low">Menor a $50.000</option>
-        <option value="high">Mayor a $50.000</option>
-      </select>
-    </div>
+  <section class="max-w-4xl mx-auto px-4 my-6">
+    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
   </section>
 
-  <section id="productos" class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
+  <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
+    <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todas las categorías</option>
+      <option value="Sillas">Sillas</option>
+      <option value="Mesas">Mesas</option>
+      <option value="Escritorios">Escritorios</option>
+    </select>
+    <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todos los precios</option>
+      <option value="low">Menor a $50.000</option>
+      <option value="high">Mayor a $50.000</option>
+    </select>
+  </section>
+
+  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
 
   <div id="modal-carrito" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg p-6 w-full max-w-md relative">
       <button onclick="toggleCarrito()" class="absolute top-2 right-4 text-xl">✖</button>
       <h2 class="text-2xl font-bold mb-4">Tu carrito</h2>
       <ul id="lista-carrito" class="mb-4 space-y-2"></ul>
-      <p class="text-right font-semibold mb-4" id="total-carrito">Total: $0</p>
+      <div class="text-right font-bold mb-4">Total: $<span id="total-carrito">0</span></div>
       <button onclick="finalizarCompra()" class="bg-black text-white px-4 py-2 rounded w-full">Finalizar compra</button>
     </div>
   </div>
 
-  <footer class="bg-gray-100 py-10 px-4 text-center mt-20 border-t">
-    <h2 class="text-2xl font-semibold mb-4">Contacto</h2>
-    <div class="space-y-2">
-      <p><strong>Email:</strong> gustavo_nieto17@hotmail.com</p>
-      <p><strong>Instagram:</strong> @gn_amoblamientos</p>
-      <p><strong>Teléfono:</strong> +54 9 261 552-4525</p>
-    </div>
+  <footer class="bg-white py-8 px-4 mt-12 border-t text-center">
+    <h2 class="text-xl font-semibold mb-4">Contacto</h2>
+    <p>Email: gustavo_nieto17@hotmail.com</p>
+    <p>Instagram: @gn_amoblamientos</p>
+    <p>Teléfono: +54 9 261 552-4525</p>
   </footer>
 
   <script>
     const productos = [
-      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/300" },
-      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/300" },
-      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/300" },
-      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/300" },
-      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/300" },
-      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/300" },
-      { id: 7, nombre: "Silla Ejecutiva", categoria: "Sillas", precio: 55000, imagen: "https://via.placeholder.com/300" },
-      { id: 8, nombre: "Mesa Ratona", categoria: "Mesas", precio: 35000, imagen: "https://via.placeholder.com/300" },
+      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/400x300?text=Silla+Moderna" },
+      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Minimalista" },
+      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/400x300?text=Escritorio+Pro" },
+      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/400x300?text=Silla+Clasica" },
+      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Comedor" },
+      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/400x300?text=Escritorio+Compacto" },
+      { id: 7, nombre: "Silla Ejecutiva", categoria: "Sillas", precio: 55000, imagen: "https://via.placeholder.com/400x300?text=Silla+Ejecutiva" },
+      { id: 8, nombre: "Mesa Ratona", categoria: "Mesas", precio: 35000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Ratona" }
     ];
 
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -120,20 +120,15 @@
         );
       }).forEach(p => {
         const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center text-center";
+        card.className = "bg-white rounded-xl shadow p-4 flex flex-col items-center hover:shadow-lg transition";
         card.innerHTML = `
-          <img src="${p.imagen}" class="w-full h-64 object-cover mb-4 rounded" />
-          <h3 class="text-xl font-semibold mb-2">${p.nombre}</h3>
-          <p class="mb-2 text-gray-600">$${p.precio.toLocaleString()}</p>
+          <img src="${p.imagen}" class="w-full h-48 object-cover mb-4 rounded" />
+          <h3 class="text-xl font-semibold mb-2 text-center">${p.nombre}</h3>
+          <p class="mb-2 text-gray-700 font-medium">$${p.precio.toLocaleString()}</p>
           <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
         `;
         contenedor.appendChild(card);
       });
-    }
-
-    function toggleCarrito() {
-      document.getElementById("modal-carrito").classList.toggle("hidden");
-      actualizarCarrito();
     }
 
     function agregarAlCarrito(id) {
@@ -148,27 +143,29 @@
       actualizarCarrito();
     }
 
+    function toggleCarrito() {
+      document.getElementById("modal-carrito").classList.toggle("hidden");
+      actualizarCarrito();
+    }
+
     function actualizarCarrito() {
       const lista = document.getElementById("lista-carrito");
-      const total = document.getElementById("total-carrito");
       lista.innerHTML = "";
       cartCount.textContent = carrito.length;
-      let totalPrecio = 0;
 
+      let total = 0;
       carrito.forEach((id, index) => {
         const p = productos.find(prod => prod.id === id);
-        if (p) {
-          totalPrecio += p.precio;
-          const li = document.createElement("li");
-          li.className = "flex justify-between items-center";
-          li.innerHTML = `
-            <span>${p.nombre} - $${p.precio.toLocaleString()}</span>
-            <button class="text-red-500" onclick="eliminarProducto(${index})">Eliminar</button>
-          `;
-          lista.appendChild(li);
-        }
+        total += p.precio;
+        const li = document.createElement("li");
+        li.className = "flex justify-between items-center";
+        li.innerHTML = `
+          <span>${p.nombre} - $${p.precio.toLocaleString()}</span>
+          <button class="text-red-500" onclick="eliminarProducto(${index})">Eliminar</button>
+        `;
+        lista.appendChild(li);
       });
-      total.textContent = "Total: $" + totalPrecio.toLocaleString();
+      document.getElementById("total-carrito").textContent = total.toLocaleString();
     }
 
     function finalizarCompra() {
