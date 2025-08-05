@@ -37,39 +37,48 @@
     }
   </style>
 </head>
-<body class="bg-white text-gray-900">
-  <a href="#" class="carrito-icono" onclick="toggleCarrito()">🛒 <span id="cart-count">0</span></a>
+<body class="bg-gray-100 text-gray-800">
+
+  <button class="carrito-icono" onclick="toggleCarrito()">🛒 <span id="cart-count">0</span></button>
+
   <a href="https://wa.me/5492615524525" class="whatsapp-bubble" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
     WhatsApp
   </a>
 
-  <header class="bg-gray-100 text-center py-12">
-    <h1 class="text-4xl font-bold mb-2">Aprovecha nuestros<br><span class="text-green-600">precios especiales de Agosto</span></h1>
-    <p class="text-gray-600 mb-4">Descuentos únicos por tiempo limitado</p>
-    <a href="#productos" class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">Ver todos los productos</a>
+  <header class="relative h-[400px] md:h-[500px] w-full overflow-hidden mb-10">
+    <img src="Imagen de WhatsApp 2025-07-13 a las 21.01.39_ca8c2be2.jpg" alt="GN_amoblamientos" class="w-full h-full object-cover object-center opacity-70">
   </header>
 
-  <section class="max-w-7xl mx-auto px-4 py-10" id="productos">
-    <h2 class="text-3xl font-bold mb-8 text-center">Precios especiales</h2>
-    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <!-- Aquí se insertan dinámicamente los productos -->
+  <section class="max-w-6xl mx-auto px-4 space-y-4 mb-8">
+    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded shadow-sm" />
+    <div class="flex flex-col md:flex-row gap-4">
+      <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
+        <option value="">Todas las categorías</option>
+        <option value="Sillas">Sillas</option>
+        <option value="Mesas">Mesas</option>
+        <option value="Escritorios">Escritorios</option>
+      </select>
+      <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
+        <option value="">Todos los precios</option>
+        <option value="low">Menor a $50.000</option>
+        <option value="high">Mayor a $50.000</option>
+      </select>
     </div>
   </section>
 
-  <section class="max-w-4xl mx-auto px-4 mb-12 flex flex-col md:flex-row gap-4">
-    <input id="search" type="text" placeholder="Buscar productos..." class="p-3 border rounded w-full" />
-    <select id="filter-category" class="p-3 border rounded w-full md:w-1/2">
-      <option value="">Todas las categorías</option>
-      <option value="Sillas">Sillas</option>
-      <option value="Mesas">Mesas</option>
-      <option value="Escritorios">Escritorios</option>
-    </select>
-    <select id="filter-price" class="p-3 border rounded w-full md:w-1/2">
-      <option value="">Todos los precios</option>
-      <option value="low">Menor a $50.000</option>
-      <option value="high">Mayor a $50.000</option>
-    </select>
-  </section>
+  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
+
+  <!-- Modales se insertan aquí -->
+  <!-- Placeholder para el modal, será manejado por JS -->
+
+  <footer class="bg-white py-8 px-4 mt-12 border-t text-center">
+    <h2 class="text-xl font-semibold mb-4">Contacto</h2>
+    <p>Email: gustavo_nieto17@hotmail.com</p>
+    <p>Instagram: @gn_amoblamientos</p>
+    <p>Teléfono: +54 9 261 552-4525</p>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
