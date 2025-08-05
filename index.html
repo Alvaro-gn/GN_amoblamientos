@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,176 +37,39 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
+<body class="bg-white text-gray-900">
   <a href="#" class="carrito-icono" onclick="toggleCarrito()">🛒 <span id="cart-count">0</span></a>
-
   <a href="https://wa.me/5492615524525" class="whatsapp-bubble" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
     WhatsApp
   </a>
 
-  <header class="relative h-[400px] md:h-[500px] w-full overflow-hidden mb-10">
-    <div class="absolute inset-0 bg-black opacity-40"></div>
-    <img src="https://via.placeholder.com/1200x500?text=GN_amoblamientos" alt="GN_amoblamientos" class="w-full h-full object-cover object-center">
+  <header class="bg-gray-100 text-center py-12">
+    <h1 class="text-4xl font-bold mb-2">Aprovecha nuestros<br><span class="text-green-600">precios especiales de Agosto</span></h1>
+    <p class="text-gray-600 mb-4">Descuentos únicos por tiempo limitado</p>
+    <a href="#productos" class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">Ver todos los productos</a>
   </header>
 
-  <section class="max-w-4xl mx-auto px-4 my-6">
-    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
+  <section class="max-w-7xl mx-auto px-4 py-10" id="productos">
+    <h2 class="text-3xl font-bold mb-8 text-center">Precios especiales</h2>
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <!-- Aquí se insertan dinámicamente los productos -->
+    </div>
   </section>
 
-  <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
-    <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
+  <section class="max-w-4xl mx-auto px-4 mb-12 flex flex-col md:flex-row gap-4">
+    <input id="search" type="text" placeholder="Buscar productos..." class="p-3 border rounded w-full" />
+    <select id="filter-category" class="p-3 border rounded w-full md:w-1/2">
       <option value="">Todas las categorías</option>
       <option value="Sillas">Sillas</option>
       <option value="Mesas">Mesas</option>
       <option value="Escritorios">Escritorios</option>
     </select>
-    <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
+    <select id="filter-price" class="p-3 border rounded w-full md:w-1/2">
       <option value="">Todos los precios</option>
       <option value="low">Menor a $50.000</option>
       <option value="high">Mayor a $50.000</option>
     </select>
   </section>
-
-  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
-
-  <div id="modal-carrito" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 w-full max-w-md relative">
-      <button onclick="toggleCarrito()" class="absolute top-2 right-4 text-xl">✖</button>
-      <h2 class="text-2xl font-bold mb-4">Tu carrito</h2>
-      <ul id="lista-carrito" class="mb-4 space-y-2"></ul>
-      <div class="text-right font-bold mb-4">Total: $<span id="total-carrito">0</span></div>
-     <button onclick="agregarAlCarrito(${p.id})" class="text-xs text-white bg-black px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 mt-1">Agregar al carrito</button>
-
-    </div>
-  </div>
-
-  <footer class="bg-white py-8 px-4 mt-12 border-t text-center">
-    <h2 class="text-xl font-semibold mb-4">Contacto</h2>
-    <p>Email: gustavo_nieto17@hotmail.com</p>
-    <p>Instagram: @gn_amoblamientos</p>
-    <p>Teléfono: +54 9 261 552-4525</p>
-  </footer>
-
-  <script>
-    const productos = [
-      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/400x300?text=Silla+Moderna" },
-      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Minimalista" },
-      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/400x300?text=Escritorio+Pro" },
-      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/400x300?text=Silla+Clasica" },
-      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Comedor" },
-      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/400x300?text=Escritorio+Compacto" },
-      { id: 7, nombre: "Silla Ejecutiva", categoria: "Sillas", precio: 55000, imagen: "https://via.placeholder.com/400x300?text=Silla+Ejecutiva" },
-      { id: 8, nombre: "Mesa Ratona", categoria: "Mesas", precio: 35000, imagen: "https://via.placeholder.com/400x300?text=Mesa+Ratona" }
-    ];
-
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    const contenedor = document.getElementById("productos");
-    const cartCount = document.getElementById("cart-count");
-
-    function renderProductos() {
- 
-      contenedor.innerHTML = "";
-  const search = document.getElementById("search").value.toLowerCase();
-  const categoria = document.getElementById("filter-category").value;
-  const precioFiltro = document.getElementById("filter-price").value;
-
-  const filtrados = productos.filter(p => {
-    return (
-      (!search || p.nombre.toLowerCase().includes(search)) &&
-      (!categoria || p.categoria === categoria) &&
-      (!precioFiltro || (precioFiltro === "low" ? p.precio < 50000 : p.precio >= 50000))
-    );
-  });
-
-  if (filtrados.length === 0) {
-    contenedor.innerHTML = `<p class="text-center col-span-full text-gray-500">No se encontraron productos.</p>`;
-    return;
-  }
-
-  filtrados.forEach(p => {
-    const card = document.createElement("div");
-    card.className =
-      "group flex flex-col items-center text-center gap-1 p-2 transition-transform duration-200 hover:scale-105";
-
-    card.innerHTML = `
-      <img src="${p.imagen}" class="w-full h-48 object-contain mb-2 transition duration-300" />
-      <h3 class="text-sm font-normal text-gray-800">${p.nombre}</h3>
-      <p class="text-base font-semibold text-black group-hover:text-gray-600 transition duration-200">$${p.precio.toLocaleString()}</p>
-      <button class="text-xs text-white bg-black px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-200 mt-1">Agregar al carrito</button>
-    `;
-
-    contenedor.appendChild(card);
-  });
-}
-     function agregarAlCarrito(id) {
-  const index = carrito.findIndex(item => item.id === id);
-  if (index >= 0) {
-    carrito[index].cantidad += 1;
-  } else {
-    carrito.push({ id, cantidad: 1 });
-  }
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  actualizarCarrito();
-}
-
-    function eliminarProducto(index) {
-  carrito.splice(index, 1);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  actualizarCarrito();
-}
-
-
-    function toggleCarrito() {
-      document.getElementById("modal-carrito").classList.toggle("hidden");
-      actualizarCarrito();
-    }
-function actualizarCarrito() {
-  const lista = document.getElementById("lista-carrito");
-  lista.innerHTML = "";
-  cartCount.textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-
-  let total = 0;
-  carrito.forEach((item, index) => {
-    const producto = productos.find(p => p.id === item.id);
-    const subtotal = producto.precio * item.cantidad;
-    total += subtotal;
-
-    const li = document.createElement("li");
-    li.className = "flex justify-between items-center text-sm";
-    li.innerHTML = `
-      <div class="flex flex-col text-left">
-        <span>${producto.nombre}</span>
-        <span class="text-gray-500">x${item.cantidad} - $${producto.precio.toLocaleString()}</span>
-      </div>
-      <div class="text-right">
-        <span class="block font-semibold">$${subtotal.toLocaleString()}</span>
-        <button class="text-red-500 text-xs mt-1" onclick="eliminarProducto(${index})">Eliminar</button>
-      </div>
-    `;
-    lista.appendChild(li);
-  });
-
-  document.getElementById("total-carrito").textContent = total.toLocaleString();
-}
-
-
-    function finalizarCompra() {
-      alert("Gracias por tu compra. Nos pondremos en contacto.");
-      carrito = [];
-      localStorage.setItem("carrito", JSON.stringify(carrito));
-      toggleCarrito();
-      actualizarCarrito();
-    }
-
-    document.getElementById("search").addEventListener("input", renderProductos);
-    document.getElementById("filter-category").addEventListener("change", renderProductos);
-    document.getElementById("filter-price").addEventListener("change", renderProductos);
-
-    renderProductos();
-    actualizarCarrito();
-  </script>
 </body>
 </html>
