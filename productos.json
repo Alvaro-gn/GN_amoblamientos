@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "nombre": "Silla Moderna",
+    "categoria": "Sillas",
+    "precio": 45000,
+    "stock": 5,
+    "color": "Gris",
+    "material": "Metal",
+    "imagen": "https://via.placeholder.com/300?text=Silla+Moderna",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Silla+Moderna+1",
+      "https://via.placeholder.com/300?text=Silla+Moderna+2"
+    ],
+    "caracteristicas": [
+      "Estructura metálica",
+      "Diseño ergonómico",
+      "Color gris"
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Mesa Minimalista",
+    "categoria": "Mesas",
+    "precio": 60000,
+    "stock": 3,
+    "color": "Natural",
+    "material": "Madera",
+    "imagen": "https://via.placeholder.com/300?text=Mesa+Minimalista",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Mesa+Minimalista+1",
+      "https://via.placeholder.com/300?text=Mesa+Minimalista+2"
+    ],
+    "caracteristicas": [
+      "Madera de pino",
+      "120x60 cm",
+      "Acabado mate"
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Escritorio Pro",
+    "categoria": "Escritorios",
+    "precio": 80000,
+    "stock": 4,
+    "color": "Negro",
+    "material": "Madera",
+    "imagen": "https://via.placeholder.com/300?text=Escritorio+Pro",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Escritorio+Pro+1",
+      "https://via.placeholder.com/300?text=Escritorio+Pro+2"
+    ],
+    "caracteristicas": [
+      "Espacio para doble monitor",
+      "Pasacables",
+      "Estilo moderno"
+    ]
+  },
+  {
+    "id": 4,
+    "nombre": "Mesa Ratona",
+    "categoria": "Mesas",
+    "precio": 35000,
+    "stock": 10,
+    "color": "Blanco",
+    "material": "Vidrio",
+    "imagen": "https://via.placeholder.com/300?text=Mesa+Ratona",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Mesa+Ratona+1",
+      "https://via.placeholder.com/300?text=Mesa+Ratona+2"
+    ],
+    "caracteristicas": [
+      "Para living",
+      "Vidrio templado",
+      "Moderna"
+    ]
+  },
+  {
+    "id": 5,
+    "nombre": "Silla Ejecutiva",
+    "categoria": "Sillas",
+    "precio": 55000,
+    "stock": 6,
+    "color": "Negro",
+    "material": "Cuero",
+    "imagen": "https://via.placeholder.com/300?text=Silla+Ejecutiva",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Silla+Ejecutiva+1",
+      "https://via.placeholder.com/300?text=Silla+Ejecutiva+2"
+    ],
+    "caracteristicas": [
+      "Con ruedas",
+      "Apoya brazos",
+      "Altura regulable"
+    ]
+  },
+  {
+    "id": 6,
+    "nombre": "Escritorio Compacto",
+    "categoria": "Escritorios",
+    "precio": 40000,
+    "stock": 7,
+    "color": "Blanco",
+    "material": "Melamina",
+    "imagen": "https://via.placeholder.com/300?text=Escritorio+Compacto",
+    "imagenes": [
+      "https://via.placeholder.com/300?text=Escritorio+Compacto+1",
+      "https://via.placeholder.com/300?text=Escritorio+Compacto+2"
+    ],
+    "caracteristicas": [
+      "Ideal para espacios pequeños",
+      "Con estante",
+      "Moderno"
+    ]
+  }
+]

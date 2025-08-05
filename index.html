@@ -69,7 +69,41 @@
 
   <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
 
-  <!-- Modales se insertan aquí -->
+  
+<!-- Modal de Detalle de Producto con slider -->
+<div id="modal-detalle" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 w-full max-w-2xl relative">
+    <button onclick="cerrarModalDetalle()" class="absolute top-2 right-4 text-xl">✖</button>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="relative">
+        <img id="slider-imagen" src="" alt="" class="w-full h-64 object-contain rounded" />
+        <div class="flex justify-center gap-2 mt-2">
+          <button onclick="cambiarImagen(-1)" class="text-xl px-2">◀</button>
+          <button onclick="cambiarImagen(1)" class="text-xl px-2">▶</button>
+        </div>
+      </div>
+      <div class="text-left">
+        <h3 id="detalle-nombre" class="text-2xl font-bold mb-2"></h3>
+        <p id="detalle-precio" class="text-lg text-gray-700 mb-2"></p>
+        <p id="detalle-descripcion" class="text-sm text-gray-600 mb-4"></p>
+        <h4 class="text-sm font-semibold mb-1">Características técnicas:</h4>
+        <ul id="detalle-caracteristicas" class="text-sm text-gray-500 list-disc list-inside mb-4"></ul>
+        <button id="detalle-boton" class="bg-black text-white px-4 py-2 rounded hover:bg-gray-700">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal del carrito -->
+<div id="modal-carrito" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 w-full max-w-md relative">
+    <button onclick="toggleCarrito()" class="absolute top-2 right-4 text-xl">✖</button>
+    <h2 class="text-2xl font-bold mb-4">Tu carrito</h2>
+    <ul id="lista-carrito" class="mb-4 space-y-2"></ul>
+    <button onclick="finalizarCompra()" class="bg-black text-white px-4 py-2 rounded w-full">Finalizar compra</button>
+  </div>
+</div>
+
   <!-- Placeholder para el modal, será manejado por JS -->
 
   <footer class="bg-white py-8 px-4 mt-12 border-t text-center">
