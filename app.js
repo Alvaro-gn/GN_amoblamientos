@@ -45,7 +45,7 @@ function productoCardHTML(p){
         <!-- CTA flotante, aparece sólo al hover -->
         <div class="absolute inset-x-0 bottom-2 px-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
           <button class="w-full bg-black text-white text-xs md:text-sm py-2 rounded pointer-events-auto"
-                  onclick="agregar(${p.id})" aria-label="Agregar ${p.nombre} al carrito">
+                  onclick="agregarAlCarrito(${p.id})" aria-label="Agregar ${p.nombre} al carrito">
             Agregar al carrito
           </button>
         </div>
@@ -249,8 +249,8 @@ function renderDetalleProducto(){
         <p class="mt-6 leading-relaxed">${p.descripcion || ""}</p>
 
         <div class="mt-8 flex gap-3">
-          <button class="bg-black text-white px-5 py-3 rounded" onclick="agregar(${p.id});toggleCarrito()">Comprar ahora</button>
-          <button class="border px-5 py-3 rounded" onclick="agregar(${p.id})">Agregar al carrito</button>
+          <button class="bg-black text-white px-5 py-3 rounded" onclick="agregarAlCarrito(${p.id});toggleCarrito()">Comprar ahora</button>
+          <button class="border px-5 py-3 rounded" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
         </div>
       </div>
     </div>
