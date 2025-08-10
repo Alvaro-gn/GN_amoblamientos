@@ -39,7 +39,6 @@ function productoCardHTML(p){
   return `
     <article class="card group relative p-4 md:p-5" tabindex="0">
       <div class="relative">
-        ``
         <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-56 md:h-64 object-contain mx-auto" />
       </div>
 
