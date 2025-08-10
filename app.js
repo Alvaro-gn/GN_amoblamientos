@@ -1,15 +1,14 @@
 // ========= DATOS =========
 const productos = [
-  { id: 1,  nombre: "SILLA MODERNA",         categoria: "Sillas",       precio: 45000, oldPrecio: 52000, cuotas: "3x $15.000",    imagen: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=900" },
-  { id: 2,  nombre: "MESA MINIMALISTA",      categoria: "Mesas",        precio: 60000, oldPrecio: 0,     cuotas: "6x $10.000",   imagen: "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d52?q=80&w=900" },
-  { id: 3,  nombre: "ESCRITORIO PRO",        categoria: "Escritorios",  precio: 80000, oldPrecio: 91000, cuotas: "6x $13.333",   imagen: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=900" },
-  { id: 4,  nombre: "SILLA CLÁSICA",         categoria: "Sillas",       precio: 30000, oldPrecio: 0,     cuotas: "3x $10.000",   imagen: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=900" },
-  { id: 5,  nombre: "MESA DE COMEDOR",       categoria: "Mesas",        precio: 70000, oldPrecio: 77000, cuotas: "6x $11.666",   imagen: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=900" },
-  { id: 6,  nombre: "ESCRITORIO COMPACTO",   categoria: "Escritorios",  precio: 40000, oldPrecio: 0,     cuotas: "3x $13.333",   imagen: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=900" },
-  { id: 7,  nombre: "SILLA EJECUTIVA",       categoria: "Sillas",       precio: 55000, oldPrecio: 62000, cuotas: "6x $9.166",    imagen: "https://images.unsplash.com/photo-1582582429416-0a0e4e3d11f6?q=80&w=900" },
-  { id: 8,  nombre: "MESA RATONA",           categoria: "Mesas",        precio: 35000, oldPrecio: 0,     cuotas: "3x $11.666",   imagen: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=900" },
-  { id: 9,  nombre: "BIBLIOTECA NORDIC",     categoria: "Bibliotecas",  precio: 92000, oldPrecio: 0,     cuotas: "6x $15.333",   imagen: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=900" },
-  { id:10,  nombre: "RACK TV 60”",           categoria: "Racks",        precio: 68000, oldPrecio: 73000, cuotas: "6x $11.333",   imagen: "https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?q=80&w=900" },
+  { id: 1, nombre: "SILLA NÓRDICA", categoria: "Sillas", precio: 39999, cuotas: "3x $13.333", imagen: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=900", descripcion: "Silla de madera y polipropileno estilo nórdico. Ideal para comedor o escritorio." },
+  { id: 2, nombre: "MESA COMEDOR ROBLE", categoria: "Mesas", precio: 159999, cuotas: "6x $26.666", imagen: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=900", descripcion: "Mesa rectangular en chapa roble, 160x80 cm. Terminación laqueada mate." },
+  { id: 3, nombre: "ESCRITORIO MINIMAL", categoria: "Escritorios", precio: 89999, cuotas: "6x $15.000", imagen: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=900", descripcion: "Estructura metálica y tapa melamina 120x60 cm. Pasacables incluido." },
+  { id: 4, nombre: "MESA RATONA LOOP", categoria: "Mesas", precio: 54999, cuotas: "3x $18.333", imagen: "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d52?q=80&w=900", descripcion: "Mesa baja redonda 70 cm. Línea minimalista para livings modernos." },
+  { id: 5, nombre: "RACK TV 60”", categoria: "Racks", precio: 109999, cuotas: "6x $18.333", imagen: "https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?q=80&w=900", descripcion: "Rack con estantes regulables y pasacables. Para TVs hasta 60 pulgadas." },
+  { id: 6, nombre: "BIBLIOTECA NORDIC", categoria: "Bibliotecas", precio: 129999, cuotas: "6x $21.666", imagen: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=900", descripcion: "Librero modular 180x80 cm. 5 estantes, terminación roble claro." },
+  { id: 7, nombre: "SILLA EJECUTIVA", categoria: "Sillas", precio: 74999, cuotas: "3x $24.999", imagen: "https://images.unsplash.com/photo-1582582429416-0a0e4e3d11f6?q=80&w=900", descripcion: "Silla ergonómica con regulación de altura y respaldo reclinable." },
+  { id: 8, nombre: "CAJONERA COMPACTA", categoria: "Almacenamiento", precio: 45999, cuotas: "3x $15.333", imagen: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=900", descripcion: "Cajonera 3 cajones con correderas metálicas. 60x40x60 cm." },
+  { id: 9, nombre: "ESTANTERÍA MODULAR", categoria: "Almacenamiento", precio: 99999, cuotas: "6x $16.666", imagen: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=900", descripcion: "Estantería configurable 160x80 cm. Módulos abiertos y cerrados." }
 ];
 
 // ========= ESTADO =========
@@ -46,7 +45,7 @@ function productoCardHTML(p){
 
       <div class="mt-4">
         <h3 class="font-heading tracking-slight text-sm md:text-base text-gray-900">
-          <a href="#producto-${p.id}" class="underline underline-offset-4 decoration-1 hover:opacity-80">${p.nombre}</a>
+          <a href="producto.html?id=${p.id}" class="underline underline-offset-4 decoration-1 hover:opacity-80">${p.nombre}</a>
         </h3>
 
         <div class="mt-1 flex items-end gap-2">
@@ -200,11 +199,56 @@ function checkoutWhatsApp(){
 }
 
 // ========= LISTENERS =========
-$("#search").addEventListener("input", renderProductos);
-$("#filter-category").addEventListener("change", renderProductos);
-$("#filter-price").addEventListener("change", renderProductos);
-$("#focus-search").addEventListener("click", ()=> $("#search").focus());
+if ($("#search")) $("#search").addEventListener("input", renderProductos);
+if ($("#filter-category")) $("#filter-category").addEventListener("change", renderProductos);
+if ($("#filter-price")) $("#filter-price").addEventListener("change", renderProductos);
+if ($("#focus-search")) $("#focus-search").addEventListener("click", ()=> $("#search").focus());
 
 // ========= INIT =========
-renderProductos();
+if (document.querySelector("#productos")) renderProductos();
 saveCart(); // actualiza contadores
+
+
+/* ========= DETALLE DE PRODUCTO ========= */
+function getProductoById(id){
+  return productos.find(p => String(p.id) === String(id));
+}
+
+function renderDetalleProducto(){
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const p = getProductoById(id);
+  const wrap = document.querySelector("#detalle-producto");
+  if (!wrap) return;
+  if (!p){
+    wrap.innerHTML = `<p class="text-center text-gray-500">Producto no encontrado.</p>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 grid gap-8 lg:grid-cols-2">
+      <div class="bg-white p-6">
+        <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-96 object-contain" />
+      </div>
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl">${p.nombre}</h1>
+        <p class="text-gray-500 mt-1">${p.categoria}</p>
+        <div class="mt-3 flex items-end gap-3">
+          <span class="text-3xl font-bold">${fmt(p.precio)}</span>
+        </div>
+        <p class="text-sm text-gray-500 mt-1">Transferencia/depósito · ${p.cuotas}</p>
+        <p class="mt-6 leading-relaxed">${p.descripcion || ""}</p>
+
+        <div class="mt-8 flex gap-3">
+          <button class="bg-black text-white px-5 py-3 rounded" onclick="agregar(${p.id});toggleCarrito()">Comprar ahora</button>
+          <button class="border px-5 py-3 rounded" onclick="agregar(${p.id})">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+if (document.querySelector("#detalle-producto")) {
+  // Inicializa detalle si estamos en la página de producto
+  saveCart();
+  renderDetalleProducto();
+}
