@@ -213,8 +213,10 @@ if ($("#filter-price")) $("#filter-price").addEventListener("change", renderProd
 if ($("#focus-search")) $("#focus-search").addEventListener("click", ()=> $("#search").focus());
 
 // ========= INIT =========
-if (document.querySelector("#productos")) renderProductos();
-saveCart(); // actualiza contadores
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.querySelector("#productos")) renderProductos();
+  saveCart(); // actualiza contadores
+});
 
 
 /* ========= DETALLE DE PRODUCTO ========= */
