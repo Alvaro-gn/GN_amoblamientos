@@ -1,1 +1,259 @@
-[INDEX_HTML_CONTENT_PLACEHOLDER]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>GN_amoblamientos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --font-headings: "Montserrat", "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --color-text: #111;
+      --color-accent: #2563eb;
+    }
+    .font-heading { font-family: var(--font-headings); letter-spacing: .015em; }
+    .tracking-slight { letter-spacing: .02em; }
+    .nav-shadow { box-shadow: 0 1px 8px rgba(0,0,0,.04); }
+    /* Cards planas sin bordes/sombras duras */
+    .card {
+      background: transparent;
+      border-radius: 0;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    .card:hover { transform: translateY(-2px); }
+    /* CTA aparece en hover/focus */
+    .card .cta { opacity: 0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; }
+    .card:hover .cta, .card:focus-within .cta { opacity: 1; transform: translateY(0); }
+    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- NAVBAR -->
+  <nav class="bg-white nav-shadow sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-14 grid grid-cols-3 items-center">
+      <!-- Izquierda: Logo -->
+      <div class="flex items-center">
+        <a href="#" class="font-heading font-semibold text-lg tracking-slight text-gray-900" aria-label="GN_amoblamientos, ir al inicio">
+          GN_amoblamientos
+        </a>
+      </div>
+
+      <!-- Centro: Menú (sin Colecciones ni Oferta) -->
+      <ul class="hidden md:flex items-center justify-center gap-6 font-heading text-sm tracking-slight text-gray-800" role="menubar" aria-label="Navegación principal">
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="#inicio">Inicio</a></li>
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="#productos">Productos</a></li>
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="#contacto">Contacto</a></li>
+      </ul>
+
+      <!-- Derecha: ÚNICO carrito -->
+      <div class="flex items-center justify-end">
+        <button class="p-2 relative" aria-label="Abrir carrito" title="Carrito" onclick="toggleCarrito()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor"><path d="M3 3h2l2.4 10.3a2 2 0 0 0 2 1.7h6.3a2 2 0 0 0 2-1.7L20 7H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg>
+          <span id="cart-count" class="absolute -top-1 -right-1 text-[10px] bg-black text-white rounded-full px-1.5 py-0.5 leading-none">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="inicio" class="relative w-full overflow-hidden">
+    <img src="https://picsum.photos/seed/gnamob/1600/500"
+         alt="Showroom GN_amoblamientos"
+         class="w-full h-[320px] md:h-[420px] object-cover object-center">
+  </header>
+
+  <!-- GRID DE PRODUCTOS (2 cols mobile, 3 tablet, 4 desktop ancho) -->
+  <main id="productos" class="max-w-7xl mx-auto px-4 lg:px-8 my-10">
+    <h2 class="sr-only">Listado de productos</h2>
+    <section
+      class="grid gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      aria-live="polite" aria-busy="false">
+    </section>
+  </main>
+
+  <!-- MODAL CARRITO -->
+  <div id="modal-carrito" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="titulo-carrito">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-lg relative shadow-2xl">
+      <button onclick="toggleCarrito()" class="absolute top-3 right-4 text-2xl" aria-label="Cerrar">✖</button>
+      <h2 id="titulo-carrito" class="text-2xl font-heading font-bold mb-4">Tu carrito</h2>
+
+      <ul id="lista-carrito" class="mb-4 space-y-3 max-h-72 overflow-auto pr-1" aria-live="polite"></ul>
+
+      <div class="flex items-center justify-between border-t pt-4 mb-4">
+        <span class="text-lg font-medium">Subtotal</span>
+        <span id="subtotal" class="text-xl font-bold">$0</span>
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <button onclick="vaciarCarrito()" class="px-4 py-2 rounded border w-1/3">Vaciar</button>
+        <button onclick="checkoutWhatsApp()" class="bg-green-600 text-white px-4 py-2 rounded w-2/3">Finalizar por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contacto" class="bg-white py-10 px-4 lg:px-8 border-t text-center">
+    <h2 class="text-xl font-semibold mb-4 font-heading">Contacto</h2>
+    <p>Email: gustavo_nieto17@hotmail.com</p>
+    <p>Instagram: @gn_amoblamientos</p>
+    <p>Teléfono: +54 9 261 552-4525</p>
+  </footer>
+
+  <script>
+    // ========= DATOS (9 productos sin "ofertas") =========
+    const productos = [
+      { id: 1,  nombre: "Biblioteca Nórdica 5 Estantes", precio: 129990, categoria: "Bibliotecas", imagen: "https://picsum.photos/seed/biblio/800/600", desc: "Diseño escandinavo, 5 estantes regulables." },
+      { id: 2,  nombre: "Mesa Ratona Roble",             precio:  89990, categoria: "Mesas",       imagen: "https://picsum.photos/seed/mesa/800/600",    desc: "Tapa de roble natural, estructura firme." },
+      { id: 3,  nombre: "Silla Minimal Tapizada",        precio:  59990, categoria: "Sillas",      imagen: "https://picsum.photos/seed/silla/800/600",   desc: "Tapizado lavable y patas de madera." },
+      { id: 4,  nombre: "Rack TV 180 cm",                precio: 149990, categoria: "Racks",       imagen: "https://picsum.photos/seed/rack/800/600",    desc: "Amplio espacio para equipos y consolas." },
+      { id: 5,  nombre: "Placard 3 Puertas",             precio: 199990, categoria: "Placares",    imagen: "https://picsum.photos/seed/placard/800/600", desc: "Gran capacidad, correderas metálicas." },
+      { id: 6,  nombre: "Escritorio Compact",            precio: 109990, categoria: "Escritorios", imagen: "https://picsum.photos/seed/escritorio/800/600", desc: "Ideal para home office en espacios reducidos." },
+      { id: 7,  nombre: "Mesa de Luz Duo",               precio:  49990, categoria: "Mesas",       imagen: "https://picsum.photos/seed/mesaluz/800/600", desc: "Doble cajón, correderas suaves." },
+      { id: 8,  nombre: "Aparador Vintage",              precio: 139990, categoria: "Aparadores",  imagen: "https://picsum.photos/seed/aparador/800/600", desc: "Estética retro con gran capacidad." },
+      { id: 9,  nombre: "Banqueta Alta",                 precio:  39990, categoria: "Sillas",      imagen: "https://picsum.photos/seed/banqueta/800/600", desc: "Estructura metálica y asiento confortable." },
+    ];
+
+    // ========= ESTADO CARRITO ÚNICO =========
+    const CART_KEY = "carrito_v2";
+    let carrito = JSON.parse(localStorage.getItem(CART_KEY)) || []; // [{id, qty}]
+
+    // ========= UTILIDADES =========
+    const $  = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+    const fmt = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+
+    function cartQtyTotal(){ return carrito.reduce((a, it) => a + it.qty, 0); }
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(carrito));
+      const total = cartQtyTotal();
+      const cartCountNav = $("#cart-count");
+      if (cartCountNav) cartCountNav.textContent = total;
+    }
+
+    // ========= RENDER LISTING =========
+    const grid = document.querySelector("#productos section");
+    function cardHTML(p){
+      return `
+        <article class="card group" tabindex="0">
+          <a class="block" href="producto.html?id=${p.id}" aria-label="Ver ${p.nombre}">
+            <div class="relative">
+              <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-48 md:h-56 object-cover" />
+            </div>
+            <div class="mt-3">
+              <h3 class="font-heading tracking-slight text-sm md:text-base text-gray-900 underline underline-offset-4 decoration-1 group-hover:opacity-80">${p.nombre}</h3>
+              <div class="mt-1 flex items-end gap-2">
+                <span class="text-xl md:text-2xl font-bold text-black">${fmt(p.precio)}</span>
+              </div>
+              <p class="text-[12px] text-gray-500 mt-1">${p.categoria || ""}</p>
+            </div>
+          </a>
+          <div class="cta mt-3">
+            <button class="w-full bg-black text-white text-sm py-2 rounded" data-add="${p.id}" aria-label="Agregar ${p.nombre} al carrito">Agregar al carrito</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderProductos(){
+      grid.setAttribute("aria-busy","true");
+      grid.innerHTML = productos.map(cardHTML).join("");
+      grid.setAttribute("aria-busy","false");
+
+      // Delegación Agregar
+      grid.querySelectorAll("[data-add]").forEach(btn=>{
+        btn.addEventListener("click", (e)=>{
+          const id = Number(e.currentTarget.getAttribute("data-add"));
+          agregarAlCarrito(id);
+          e.currentTarget.textContent = "Agregado ✓";
+          setTimeout(()=> e.currentTarget.textContent = "Agregar al carrito", 900);
+        });
+      });
+    }
+
+    // ========= CARRITO =========
+    function agregarAlCarrito(id){
+      const idx = carrito.findIndex(it => it.id === id);
+      if (idx >= 0) carrito[idx].qty += 1;
+      else carrito.push({ id, qty: 1 });
+      saveCart();
+      renderCarrito();
+    }
+    function restarDelCarrito(id){
+      const idx = carrito.findIndex(it => it.id === id);
+      if (idx >= 0){
+        carrito[idx].qty -= 1;
+        if (carrito[idx].qty <= 0) carrito.splice(idx,1);
+        saveCart(); renderCarrito();
+      }
+    }
+    function eliminarDelCarrito(id){
+      carrito = carrito.filter(it => it.id !== id);
+      saveCart(); renderCarrito();
+    }
+    function vaciarCarrito(){ carrito = []; saveCart(); renderCarrito(); }
+    function toggleCarrito(){
+      $("#modal-carrito").classList.toggle("hidden");
+      renderCarrito();
+    }
+
+    function renderCarrito(){
+      const lista = $("#lista-carrito");
+      if (!lista) return;
+
+      lista.innerHTML = "";
+      let subtotal = 0;
+
+      if (carrito.length === 0){
+        lista.innerHTML = `<li class="text-gray-500">Tu carrito está vacío.</li>`;
+      } else {
+        carrito.forEach(item=>{
+          const p = productos.find(x=>x.id===item.id);
+          if (!p) return;
+          const totalLinea = p.precio * item.qty;
+          subtotal += totalLinea;
+
+          const li = document.createElement("li");
+          li.className = "flex items-center justify-between gap-2";
+          li.innerHTML = `
+            <div class="flex items-center gap-3">
+              <img src="${p.imagen}" alt="${p.nombre}" class="w-14 h-14 object-cover rounded">
+              <div>
+                <p class="font-medium">${p.nombre}</p>
+                <p class="text-sm text-gray-500">${fmt(p.precio)} c/u</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="px-2 py-1 border rounded" data-dec="${p.id}" aria-label="Restar uno">−</button>
+              <span class="w-6 text-center">${item.qty}</span>
+              <button class="px-2 py-1 border rounded" data-inc="${p.id}" aria-label="Sumar uno">+</button>
+              <span class="w-20 text-right font-semibold">${fmt(totalLinea)}</span>
+              <button class="text-red-600 ml-2" data-del="${p.id}" aria-label="Eliminar del carrito">Eliminar</button>
+            </div>
+          `;
+          lista.appendChild(li);
+        });
+      }
+
+      $("#subtotal").textContent = fmt(subtotal);
+
+      // Listeners +/−/eliminar
+      lista.querySelectorAll("[data-inc]").forEach(b=>b.addEventListener("click", e=>{
+        const id = Number(e.currentTarget.getAttribute("data-inc"));
+        agregarAlCarrito(id);
+      }));
+      lista.querySelectorAll("[data-dec]").forEach(b=>b.addEventListener("click", e=>{
+        const id = Number(e.currentTarget.getAttribute("data-dec"));
+        restarDelCarrito(id);
+      }));
+      lista.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click", e=>{
+        const id = Number(e.currentTarget.getAttribute("data-del"));
+        eliminarDelCarrito(id);
+      }));
+    }
+
+    // ========= INIT =========
+    renderProductos();
+    saveCart(); // actualiza contador
+  </script>
+</body>
+</html>
