@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Producto — GN_amoblamientos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Producto | GN_amoblamientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    :root{ --font-headings: "Montserrat","Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; --color-accent:#2563eb; }
+    .font-heading { font-family: var(--font-headings); letter-spacing: .015em; }
+    .nav-shadow { box-shadow: 0 1px 8px rgba(0,0,0,.04); }
+    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <!-- NAVBAR (igual a index) -->
+  <!-- NAVBAR (mismo, con único carrito) -->
   <nav class="bg-white nav-shadow sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <a href="./index.html" class="font-heading font-semibold text-lg tracking-slight text-gray-900" aria-label="GN_amoblamientos, ir al inicio">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 h-14 grid grid-cols-3 items-center">
+      <div class="flex items-center">
+        <a href="index.html" class="font-heading font-semibold text-lg text-gray-900" aria-label="GN_amoblamientos, ir al inicio">
           GN_amoblamientos
         </a>
       </div>
-      <ul class="hidden md:flex items-center gap-6 font-heading text-sm tracking-slight text-gray-800">
-        <li><a class="hover:underline underline-offset-4" href="./index.html#inicio">Inicio</a></li>
-        <li><a class="hover:underline underline-offset-4" href="./index.html#productos">Productos</a></li>
-        <li><a class="hover:underline underline-offset-4 text-red-600" href="./index.html#sale">Sale!</a></li>
-        <li><a class="hover:underline underline-offset-4" href="./index.html#contacto">Contacto</a></li>
+      <ul class="hidden md:flex items-center justify-center gap-6 font-heading text-sm text-gray-800" role="menubar" aria-label="Navegación principal">
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="index.html#inicio">Inicio</a></li>
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="index.html#productos">Productos</a></li>
+        <li role="none"><a role="menuitem" class="hover:underline underline-offset-4" href="index.html#contacto">Contacto</a></li>
       </ul>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center justify-end">
         <button class="p-2 relative" aria-label="Abrir carrito" title="Carrito" onclick="toggleCarrito()">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor"><path d="M3 3h2l2.4 10.3a2 2 0 0 0 2 1.7h6.3a2 2 0 0 0 2-1.7L20 7H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg>
           <span id="cart-count" class="absolute -top-1 -right-1 text-[10px] bg-black text-white rounded-full px-1.5 py-0.5 leading-none">0</span>
@@ -31,47 +35,31 @@
     </div>
   </nav>
 
-  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-    <a href="./index.html#productos" class="text-sm underline underline-offset-4">← Volver a productos</a>
+  <!-- CONTENIDO DETALLE -->
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 my-10">
+    <a href="index.html#productos" class="text-sm underline underline-offset-4 hover:opacity-80">&larr; Volver</a>
 
-    <div id="product-detail" class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-6">
-      <!-- izquierda: imagen -->
+    <section id="detalle" class="mt-6 grid gap-8 md:grid-cols-2 items-start">
+      <!-- Imagen -->
       <div>
-        <img id="pd-img" src="" alt="" class="w-full h-[420px] object-contain bg-white" />
-        <div id="pd-thumbs" class="mt-3 flex gap-2"></div>
+        <img id="p-imagen" src="" alt="" class="w-full h-[320px] md:h-[460px] object-cover rounded" />
       </div>
-      <!-- derecha: info -->
-      <section>
-        <h1 id="pd-name" class="font-heading text-2xl md:text-3xl tracking-slight text-gray-900 underline underline-offset-4"></h1>
-        <div class="mt-3 flex items-end gap-3">
-          <span id="pd-price" class="text-3xl font-bold text-black"></span>
-          <span id="pd-old" class="text-base text-gray-400 line-through hidden"></span>
+      <!-- Info -->
+      <div>
+        <h1 id="p-titulo" class="font-heading text-2xl md:text-3xl font-bold text-gray-900"></h1>
+        <p id="p-categoria" class="text-sm text-gray-500 mt-1"></p>
+        <div class="mt-3 text-3xl font-bold" id="p-precio">$0</div>
+        <p id="p-desc" class="mt-4 text-gray-700 leading-relaxed"></p>
+
+        <div class="mt-6 flex gap-3">
+          <button id="btn-add" class="bg-black text-white px-4 py-2 rounded font-medium">Agregar al carrito</button>
+          <a id="btn-wa" class="px-4 py-2 rounded border font-medium" target="_blank" rel="noopener">Consultar por WhatsApp</a>
         </div>
-        <p class="text-sm text-gray-500 mt-1">con transf/dep. · <span id="pd-cuotas"></span></p>
+      </div>
+    </section>
+  </main>
 
-        <p id="pd-desc" class="mt-6 text-gray-700"></p>
-
-        <div class="mt-6 grid grid-cols-2 gap-3 max-w-sm">
-          <button id="btn-add" class="bg-black text-white py-2">Agregar al carrito</button>
-          <button id="btn-whatsapp" class="border py-2">Consultar por WhatsApp</button>
-        </div>
-
-        <ul class="mt-8 text-sm text-gray-600 space-y-1">
-          <li>• Fabricación nacional</li>
-          <li>• Garantía 12 meses</li>
-          <li>• Retiro en tienda o envío</li>
-        </ul>
-      </section>
-    </div>
-  
-  <section class="max-w-7xl mx-auto px-4 lg:px-8 mt-12">
-    <h2 class="font-heading text-lg tracking-slight mb-4">Productos relacionados</h2>
-    <div id="relacionados" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
-  </section>
-
-</main>
-
-  <!-- MODAL CARRITO (compartido) -->
+  <!-- MODAL CARRITO (mismo que index) -->
   <div id="modal-carrito" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50" role="dialog" aria-modal="true" aria-labelledby="titulo-carrito">
     <div class="bg-white rounded-2xl p-6 w-full max-w-lg relative shadow-2xl">
       <button onclick="toggleCarrito()" class="absolute top-3 right-4 text-2xl" aria-label="Cerrar">✖</button>
@@ -88,86 +76,113 @@
     </div>
   </div>
 
-  <footer class="bg-white py-10 px-4 lg:px-8 border-t text-center">
-    <p class="text-sm text-gray-500">© GN_amoblamientos</p>
-  </footer>
-
-  <script src="./app.js"></script>
   <script>
-    // Lee ?id= de la URL
-    const params = new URLSearchParams(location.search);
-    const id = Number(params.get("id"));
-    const { productos, agregarAlCarrito, fmt, getRelated } = window.__GN__;
+    // Mismo dataset que en index (ID/propiedades deben coincidir)
+    const productos = [
+      { id: 1,  nombre: "Biblioteca Nórdica 5 Estantes", precio: 129990, categoria: "Bibliotecas", imagen: "https://picsum.photos/seed/biblio/800/600", desc: "Diseño escandinavo, 5 estantes regulables." },
+      { id: 2,  nombre: "Mesa Ratona Roble",             precio:  89990, categoria: "Mesas",       imagen: "https://picsum.photos/seed/mesa/800/600",    desc: "Tapa de roble natural, estructura firme." },
+      { id: 3,  nombre: "Silla Minimal Tapizada",        precio:  59990, categoria: "Sillas",      imagen: "https://picsum.photos/seed/silla/800/600",   desc: "Tapizado lavable y patas de madera." },
+      { id: 4,  nombre: "Rack TV 180 cm",                precio: 149990, categoria: "Racks",       imagen: "https://picsum.photos/seed/rack/800/600",    desc: "Amplio espacio para equipos y consolas." },
+      { id: 5,  nombre: "Placard 3 Puertas",             precio: 199990, categoria: "Placares",    imagen: "https://picsum.photos/seed/placard/800/600", desc: "Gran capacidad, correderas metálicas." },
+      { id: 6,  nombre: "Escritorio Compact",            precio: 109990, categoria: "Escritorios", imagen: "https://picsum.photos/seed/escritorio/800/600", desc: "Ideal para home office en espacios reducidos." },
+      { id: 7,  nombre: "Mesa de Luz Duo",               precio:  49990, categoria: "Mesas",       imagen: "https://picsum.photos/seed/mesaluz/800/600", desc: "Doble cajón, correderas suaves." },
+      { id: 8,  nombre: "Aparador Vintage",              precio: 139990, categoria: "Aparadores",  imagen: "https://picsum.photos/seed/aparador/800/600", desc: "Estética retro con gran capacidad." },
+      { id: 9,  nombre: "Banqueta Alta",                 precio:  39990, categoria: "Sillas",      imagen: "https://picsum.photos/seed/banqueta/800/600", desc: "Estructura metálica y asiento confortable." },
+    ];
 
-    const p = productos.find(x => x.id === id);
-    if (!p) {
-      document.getElementById("product-detail").innerHTML = '<p class="text-gray-600">Producto no encontrado.</p>';
-    } else {
-      document.getElementById("pd-img").src = p.imagen;
-      document.getElementById("pd-img").alt = p.nombre;
-      document.getElementById("pd-name").textContent = p.nombre;
-      document.getElementById("pd-price").textContent = fmt(p.precio);
-      document.getElementById("pd-cuotas").textContent = p.cuotas || "";
-      document.getElementById("pd-desc").textContent = p.descripcion || "";
+    // ======== Carrito (compartido) ========
+    const CART_KEY = "carrito_v2";
+    let carrito = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    const fmt = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+    const $  = (sel) => document.querySelector(sel);
 
-      if (p.oldPrecio && p.oldPrecio > p.precio) {
-        const old = document.getElementById("pd-old");
-        old.classList.remove("hidden");
-        old.textContent = fmt(p.oldPrecio);
-      }
-
-      document.getElementById("btn-add").addEventListener("click", () => agregarAlCarrito(p.id));
-
-    // Render miniaturas (galería)
-    const thumbs = document.getElementById("pd-thumbs");
-    if (p.galeria && p.galeria.length) {
-      p.galeria.forEach((src, i) => {
-        const b = document.createElement("button");
-        b.className = "w-16 h-16 border border-gray-200 bg-white flex items-center justify-center";
-        b.setAttribute("aria-label", "Ver imagen " + (i+1));
-        b.innerHTML = `<img src="${src}" alt="" class="max-w-full max-h-full object-contain" />`;
-        b.addEventListener("click", () => {
-          document.getElementById("pd-img").src = src;
-        });
-        thumbs.appendChild(b);
-      });
+    function cartQtyTotal(){ return carrito.reduce((a, it) => a + it.qty, 0); }
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(carrito));
+      const cartCountNav = $("#cart-count");
+      if (cartCountNav) cartCountNav.textContent = cartQtyTotal();
     }
+    function agregarAlCarrito(id){
+      const idx = carrito.findIndex(it => it.id === id);
+      if (idx >= 0) carrito[idx].qty += 1; else carrito.push({ id, qty: 1 });
+      saveCart(); renderCarrito();
+    }
+    function restarDelCarrito(id){
+      const idx = carrito.findIndex(it => it.id === id);
+      if (idx >= 0){ carrito[idx].qty -= 1; if (carrito[idx].qty <= 0) carrito.splice(idx,1); saveCart(); renderCarrito(); }
+    }
+    function eliminarDelCarrito(id){ carrito = carrito.filter(it => it.id !== id); saveCart(); renderCarrito(); }
+    function vaciarCarrito(){ carrito = []; saveCart(); renderCarrito(); }
+    function toggleCarrito(){ $("#modal-carrito").classList.toggle("hidden"); renderCarrito(); }
 
-    // Render relacionados
-    const rel = getRelated(p.categoria, p.id, 4);
-    const relWrap = document.getElementById("relacionados");
-    if (relWrap) {
-      relWrap.innerHTML = rel.map(r => `
-        <article class="card group relative p-4 md:p-5" tabindex="0">
-          <a href="product.html?id=${r.id}" class="block">
-            <img src="${r.imagen}" alt="${r.nombre}" class="w-full h-56 md:h-64 object-contain mx-auto" />
-            <h3 class="font-heading tracking-slight text-sm md:text-base text-gray-900 mt-3 underline underline-offset-4">${r.nombre}</h3>
-            <div class="mt-1 flex items-end gap-2">
-              <span class="text-xl md:text-2xl font-bold text-black">${fmt(r.precio)}</span>
+    function renderCarrito(){
+      const lista = $("#lista-carrito"); if (!lista) return;
+      lista.innerHTML = ""; let subtotal = 0;
+      if (carrito.length === 0){ lista.innerHTML = `<li class="text-gray-500">Tu carrito está vacío.</li>`; }
+      else {
+        carrito.forEach(item=>{
+          const p = productos.find(x=>x.id===item.id); if (!p) return;
+          const totalLinea = p.precio * item.qty; subtotal += totalLinea;
+          const el = document.createElement("li");
+          el.className = "flex items-center justify-between gap-2";
+          el.innerHTML = `
+            <div class="flex items-center gap-3">
+              <img src="${p.imagen}" alt="${p.nombre}" class="w-14 h-14 object-cover rounded">
+              <div><p class="font-medium">${p.nombre}</p><p class="text-sm text-gray-500">${fmt(p.precio)} c/u</p></div>
             </div>
-            <p class="text-[12px] text-gray-500 mt-1">con transf/dep. · ${r.cuotas || ""}</p>
-          </a>
-          <div class="cta mt-4">
-            <button class="w-full bg-black text-white text-sm py-2" data-add="${r.id}" aria-label="Agregar ${r.nombre} al carrito">Agregar al carrito</button>
-          </div>
-        </article>
-      `).join("");
-
-      relWrap.querySelectorAll("[data-add]").forEach(btn=>{
-        btn.addEventListener("click", (e)=>{
-          const id = Number(e.currentTarget.getAttribute("data-add"));
-          agregarAlCarrito(id);
-          e.currentTarget.textContent = "Agregado ✓";
-          setTimeout(()=> e.currentTarget.textContent = "Agregar al carrito", 900);
+            <div class="flex items-center gap-2">
+              <button class="px-2 py-1 border rounded" data-dec="${p.id}" aria-label="Restar uno">−</button>
+              <span class="w-6 text-center">${item.qty}</span>
+              <button class="px-2 py-1 border rounded" data-inc="${p.id}" aria-label="Sumar uno">+</button>
+              <span class="w-20 text-right font-semibold">${fmt(totalLinea)}</span>
+              <button class="text-red-600 ml-2" data-del="${p.id}" aria-label="Eliminar del carrito">Eliminar</button>
+            </div>`;
+          lista.appendChild(el);
         });
-      });
+      }
+      $("#subtotal").textContent = fmt(subtotal);
+      lista.querySelectorAll("[data-inc]").forEach(b=>b.addEventListener("click", e=>agregarAlCarrito(Number(e.currentTarget.getAttribute("data-inc")))));
+      lista.querySelectorAll("[data-dec]").forEach(b=>b.addEventListener("click", e=>restarDelCarrito(Number(e.currentTarget.getAttribute("data-dec")))));
+      lista.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click", e=>eliminarDelCarrito(Number(e.currentTarget.getAttribute("data-del")))));
     }
 
-      document.getElementById("btn-whatsapp").addEventListener("click", () => {
-        const msg = encodeURIComponent(`Hola, quiero consultar por: ${p.nombre} (${fmt(p.precio)})`);
-        window.open(`https://wa.me/5492615524525?text=${msg}`, "_blank", "noopener");
-      });
+    // ======== Cargar producto por ?id= ========
+    function getId(){ const u = new URL(location.href); return Number(u.searchParams.get("id")); }
+    function initDetalle(){
+      const id = getId();
+      const p = productos.find(x=>x.id===id);
+      if (!p){
+        $("#detalle").innerHTML = `<p class="text-center text-gray-600">Producto no encontrado.</p>`;
+        return;
+      }
+      $("#p-imagen").src = p.imagen;
+      $("#p-imagen").alt = p.nombre;
+      $("#p-titulo").textContent = p.nombre;
+      $("#p-categoria").textContent = p.categoria || "";
+      $("#p-precio").textContent = fmt(p.precio);
+      $("#p-desc").textContent = p.desc || "Producto de GN_amoblamientos.";
+
+      $("#btn-add").addEventListener("click", ()=>agregarAlCarrito(p.id));
+      const waText = encodeURIComponent(`Hola, me interesa "${p.nombre}" (${fmt(p.precio)}).`);
+      $("#btn-wa").href = `https://wa.me/5492615524525?text=${waText}`;
     }
+
+    // ======== Checkout WhatsApp (mismo que index) ========
+    function checkoutWhatsApp(){
+      if (carrito.length === 0){ alert("Tu carrito está vacío."); return; }
+      const fmtAR = (n)=>n.toLocaleString("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:0});
+      const lineas = carrito.map(it=>{
+        const p = productos.find(x=>x.id===it.id);
+        return `• ${p?.nombre || "Item"} x ${it.qty} = ${fmtAR((p?.precio||0)*it.qty)}`;
+      }).join("%0A");
+      const total = carrito.reduce((acc,it)=>{ const p = productos.find(x=>x.id===it.id); return acc + (p ? p.precio*it.qty : 0); },0);
+      const msg = `Hola, me interesa realizar esta compra:%0A${lineas}%0A%0ATotal: ${encodeURIComponent(fmtAR(total))}%0A%0ADatos de contacto:`;
+      window.open(`https://wa.me/5492615524525?text=${msg}`,"_blank","noopener");
+    }
+
+    // ======== INIT ========
+    initDetalle();
+    saveCart();
   </script>
 </body>
 </html>
