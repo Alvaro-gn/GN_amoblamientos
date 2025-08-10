@@ -39,12 +39,24 @@ function productoCardHTML(p){
 
   return `
     <article class="group relative p-2 md:p-3 select-none">
+      <!-- IMAGEN -->
+      <div class="relative bg-white">
+        <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-52 md:h-56 object-contain mx-auto transition-opacity duration-200 group-hover:opacity-90" />
+        <!-- CTA flotante, aparece sólo al hover -->
+        <div class="absolute inset-x-0 bottom-2 px-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+          <button class="w-full bg-black text-white text-xs md:text-sm py-2 rounded pointer-events-auto"
+                  onclick="agregar(${p.id})" aria-label="Agregar ${p.nombre} al carrito">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+
       <!-- TÍTULO -->
-      <h3 class="font-heading text-[13px] md:text-sm tracking-slight text-gray-900 uppercase leading-tight">
+      <h3 class="mt-2 font-heading text-[13px] md:text-sm tracking-slight text-gray-900 uppercase leading-tight">
         <a href="producto.html?id=${p.id}" class="hover:underline underline-offset-4 decoration-1">${p.nombre}</a>
       </h3>
 
-      <!-- PRECIOS / FINANCIACIÓN -->
+      <!-- PRECIOS / FINANCIACIÓN debajo de la foto -->
       <div class="mt-1">
         ${tienePromo ? `<div class="text-gray-400 line-through text-xs md:text-sm">${fmt(p.oldPrecio)}</div>` : ``}
         <div class="text-2xl md:text-[28px] font-extrabold text-black">${fmt(p.precio)}</div>
@@ -53,18 +65,6 @@ function productoCardHTML(p){
           ${p.cuotas}
           ${tienePromo ? `<span class="ml-1 text-blue-600 font-semibold">${offPct}% OFF</span>` : ``}
         </div>
-      </div>
-
-      <!-- IMAGEN -->
-      <div class="mt-2">
-        <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-52 md:h-56 object-contain mx-auto transition-opacity duration-200 group-hover:opacity-90" />
-      </div>
-
-      <!-- CTA -->
-      <div class="mt-2">
-        <button class="w-full bg-black text-white text-xs md:text-sm py-2" onclick="agregar(${p.id})" aria-label="Agregar ${p.nombre} al carrito">
-          Agregar al carrito
-        </button>
       </div>
     </article>
   `;

@@ -64,3 +64,8 @@
 #productos article { background: transparent; border: 0; box-shadow: none; }
 #productos h3 a { text-decoration-thickness: 1px; }
 
+
+
+/* Hover CTA reveal */
+#productos article .absolute { will-change: transform, opacity; }
+
