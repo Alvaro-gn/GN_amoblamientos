@@ -23,7 +23,6 @@ const fmt = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS
 const pct = (oldP, p) => oldP > 0 ? Math.round((1 - (p / oldP)) * 100) : 0;
 
 const cartCountNav = $("#cart-count");
-const cartCountFab = $("#cart-count-fab");
 const contenedor   = $("#productos");
 
 function cartQtyTotal(){ return carrito.reduce((a, it) => a + it.qty, 0); }
@@ -31,7 +30,7 @@ function saveCart(){
   localStorage.setItem(CART_KEY, JSON.stringify(carrito));
   const total = cartQtyTotal();
   if (cartCountNav) cartCountNav.textContent = total;
-  if (cartCountFab) cartCountFab.textContent = total;
+  
 }
 
 // ========= RENDER PRODUCTOS (clon estético) =========
@@ -41,7 +40,7 @@ function productoCardHTML(p){
   return `
     <article class="card group relative p-4 md:p-5" tabindex="0">
       <div class="relative">
-        ${tienePromo ? `<span class="absolute left-0 top-0 text-xs font-medium text-white bg-blue-600/90 px-2 py-0.5 rounded">${off}% OFF</span>` : ``}
+        ``
         <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-56 md:h-64 object-contain mx-auto" />
       </div>
 
