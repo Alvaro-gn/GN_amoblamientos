@@ -1,14 +1,14 @@
 // ========= DATOS =========
 const productos = [
-  { id: 1, nombre: "SILLA NÓRDICA", categoria: "Sillas", precio: 39999, cuotas: "3x $13.333", imagen: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=900", descripcion: "Silla de madera y polipropileno estilo nórdico. Ideal para comedor o escritorio." },
-  { id: 2, nombre: "MESA COMEDOR ROBLE", categoria: "Mesas", precio: 159999, cuotas: "6x $26.666", imagen: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=900", descripcion: "Mesa rectangular en chapa roble, 160x80 cm. Terminación laqueada mate." },
+  { id: 1, nombre: "SILLA NÓRDICA", categoria: "Sillas", precio: 39999, oldPrecio: 47199, cuotas: "3x $13.333", imagen: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=900", descripcion: "Silla de madera y polipropileno estilo nórdico. Ideal para comedor o escritorio." },
+  { id: 2, nombre: "MESA COMEDOR ROBLE", categoria: "Mesas", precio: 159999, oldPrecio: 188799, cuotas: "6x $26.666", imagen: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=900", descripcion: "Mesa rectangular en chapa roble, 160x80 cm. Terminación laqueada mate." },
   { id: 3, nombre: "ESCRITORIO MINIMAL", categoria: "Escritorios", precio: 89999, cuotas: "6x $15.000", imagen: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=900", descripcion: "Estructura metálica y tapa melamina 120x60 cm. Pasacables incluido." },
-  { id: 4, nombre: "MESA RATONA LOOP", categoria: "Mesas", precio: 54999, cuotas: "3x $18.333", imagen: "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d52?q=80&w=900", descripcion: "Mesa baja redonda 70 cm. Línea minimalista para livings modernos." },
-  { id: 5, nombre: "RACK TV 60”", categoria: "Racks", precio: 109999, cuotas: "6x $18.333", imagen: "https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?q=80&w=900", descripcion: "Rack con estantes regulables y pasacables. Para TVs hasta 60 pulgadas." },
+  { id: 4, nombre: "MESA RATONA LOOP", categoria: "Mesas", precio: 54999, oldPrecio: 64899, cuotas: "3x $18.333", imagen: "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d52?q=80&w=900", descripcion: "Mesa baja redonda 70 cm. Línea minimalista para livings modernos." },
+  { id: 5, nombre: "RACK TV 60”", categoria: "Racks", precio: 109999, oldPrecio: 129799, cuotas: "6x $18.333", imagen: "https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?q=80&w=900", descripcion: "Rack con estantes regulables y pasacables. Para TVs hasta 60 pulgadas." },
   { id: 6, nombre: "BIBLIOTECA NORDIC", categoria: "Bibliotecas", precio: 129999, cuotas: "6x $21.666", imagen: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=900", descripcion: "Librero modular 180x80 cm. 5 estantes, terminación roble claro." },
-  { id: 7, nombre: "SILLA EJECUTIVA", categoria: "Sillas", precio: 74999, cuotas: "3x $24.999", imagen: "https://images.unsplash.com/photo-1582582429416-0a0e4e3d11f6?q=80&w=900", descripcion: "Silla ergonómica con regulación de altura y respaldo reclinable." },
+  { id: 7, nombre: "SILLA EJECUTIVA", categoria: "Sillas", precio: 74999, oldPrecio: 88499, cuotas: "3x $24.999", imagen: "https://images.unsplash.com/photo-1582582429416-0a0e4e3d11f6?q=80&w=900", descripcion: "Silla ergonómica con regulación de altura y respaldo reclinable." },
   { id: 8, nombre: "CAJONERA COMPACTA", categoria: "Almacenamiento", precio: 45999, cuotas: "3x $15.333", imagen: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=900", descripcion: "Cajonera 3 cajones con correderas metálicas. 60x40x60 cm." },
-  { id: 9, nombre: "ESTANTERÍA MODULAR", categoria: "Almacenamiento", precio: 99999, cuotas: "6x $16.666", imagen: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=900", descripcion: "Estantería configurable 160x80 cm. Módulos abiertos y cerrados." }
+  { id: 9, nombre: "ESTANTERÍA MODULAR", categoria: "Almacenamiento", precio: 99999, oldPrecio: 117999, cuotas: "6x $16.666", imagen: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=900", descripcion: "Estantería configurable 160x80 cm. Módulos abiertos y cerrados." }
 ];
 
 // ========= ESTADO =========
@@ -35,27 +35,36 @@ function saveCart(){
 // ========= RENDER PRODUCTOS (clon estético) =========
 function productoCardHTML(p){
   const tienePromo = p.oldPrecio && p.oldPrecio > p.precio;
-  const off = pct(p.oldPrecio || 0, p.precio);
+  const offPct = tienePromo ? Math.round((1 - (p.precio / p.oldPrecio)) * 100) : 0;
+
   return `
-    <article class="card group relative p-4 md:p-5" tabindex="0">
-      <div class="relative">
-        <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-56 md:h-64 object-contain mx-auto" />
-      </div>
+    <article class="group relative p-2 md:p-3 select-none">
+      <!-- TÍTULO -->
+      <h3 class="font-heading text-[13px] md:text-sm tracking-slight text-gray-900 uppercase leading-tight">
+        <a href="producto.html?id=${p.id}" class="hover:underline underline-offset-4 decoration-1">${p.nombre}</a>
+      </h3>
 
-      <div class="mt-4">
-        <h3 class="font-heading tracking-slight text-sm md:text-base text-gray-900">
-          <a href="producto.html?id=${p.id}" class="underline underline-offset-4 decoration-1 hover:opacity-80">${p.nombre}</a>
-        </h3>
-
-        <div class="mt-1 flex items-end gap-2">
-          <span class="text-xl md:text-2xl font-bold text-black">${fmt(p.precio)}</span>
-          ${tienePromo ? `<span class="text-sm text-gray-400 line-through">${fmt(p.oldPrecio)}</span>` : ``}
+      <!-- PRECIOS / FINANCIACIÓN -->
+      <div class="mt-1">
+        ${tienePromo ? `<div class="text-gray-400 line-through text-xs md:text-sm">${fmt(p.oldPrecio)}</div>` : ``}
+        <div class="text-2xl md:text-[28px] font-extrabold text-black">${fmt(p.precio)}</div>
+        <div class="text-[11px] md:text-xs text-gray-600">con Transf./Dep. banc.</div>
+        <div class="text-[11px] md:text-xs text-gray-600 flex items-center gap-1">
+          ${p.cuotas}
+          ${tienePromo ? `<span class="ml-1 text-blue-600 font-semibold">${offPct}% OFF</span>` : ``}
         </div>
-        <p class="text-[12px] text-gray-500 mt-1">con transf/dep. · ${p.cuotas}</p>
       </div>
 
-      <div class="cta mt-4">
-        <button class="w-full bg-black text-white text-sm py-2" data-add="${p.id}" aria-label="Agregar ${p.nombre} al carrito">Agregar al carrito</button>
+      <!-- IMAGEN -->
+      <div class="mt-2">
+        <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-52 md:h-56 object-contain mx-auto transition-opacity duration-200 group-hover:opacity-90" />
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-2">
+        <button class="w-full bg-black text-white text-xs md:text-sm py-2" onclick="agregar(${p.id})" aria-label="Agregar ${p.nombre} al carrito">
+          Agregar al carrito
+        </button>
       </div>
     </article>
   `;

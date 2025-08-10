@@ -58,3 +58,9 @@
   font-weight: 700; z-index: 50; display: flex; align-items: center; gap: .5rem;
 }
 .whatsapp-bubble img { width: 20px; height: 20px; }
+
+
+/* Estilo listado tipo SERUS */
+#productos article { background: transparent; border: 0; box-shadow: none; }
+#productos h3 a { text-decoration-thickness: 1px; }
+
